@@ -1,37 +1,43 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-
-defineProps<{ msg: string }>()
-
-const count = ref(0)
-</script>
-
 <template>
   <h1>{{ msg }}</h1>
-
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-  </p>
-
-  <p>See <code>README.md</code> for more information.</p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Docs
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
-  </p>
-
-  <button type="button" @click="count++">count is: {{ count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+  <div>组件中:{{ store.count }}</div>
+  <div>年龄:{{ store.age }}</div>
 </template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+import { useStore } from "../store/index";
+
+const store = useStore();
+
+defineProps<{ msg: string }>();
+
+const count = ref(0);
+
+const subscribe = store.$subscribe(
+  (mutation, state) => {
+    /*
+      * mutation主要包含三个属性值：
+      *   events：当前state改变的具体数据，包括改变前的值和改变后的值等等数据
+      *   storeId：是当前store的id
+      *   type：用于记录这次数据变化是通过什么途径，主要有三个分别是
+      *         “direct” ：通过 action 变化的
+                ”patch object“ ：通过 $patch 传递对象的方式改变的
+                “patch function” ：通过 $patch 传递函数的方式改变的
+      *
+      * */
+    // 我们就可以在此处监听store中值的变化，当变化为某个值的时候，去做一些业务操作之类的
+    console.log(mutation, state, 2222);
+  },
+  { detached: false, immediate: true }
+); //第二个参数options对象，是各种配置参数
+//detached:布尔值，默认是 false，正常情况下，当订阅所在的组件被卸载时，订阅将被停止删除，
+// 如果设置detached值为 true 时，即使所在组件被卸载，订阅依然在生效
+//参数还有immediate，deep，flush等等参数 和vue3 watch的参数是一样的，多的就不介绍了，用到再看文档吧
+
+// 停止订阅
+// subscribe()
+</script>
 
 <style scoped>
 a {

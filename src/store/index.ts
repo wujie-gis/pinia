@@ -6,6 +6,7 @@ export const useStore = defineStore({
   id: "myGlobalState",
   state: () => ({
     count: 2,
+    age: 23,
   }),
   getters: {
     // 一个基本的 Getter： 计算 count 的平方
@@ -37,10 +38,21 @@ export const useStore = defineStore({
   actions: {
     countPlusOne() {
       this.count++;
+      // this.age++;
     },
-      countPlus(num: number) {
-        
+    countPlus(num: number) {
       this.count += num;
     },
+  },
+  // 开启数据缓存
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: "my_user",
+        storage: localStorage,
+        paths: ["count"],
+      },
+    ],
   },
 });
