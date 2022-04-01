@@ -10,7 +10,8 @@
     "axios": "^0.26.1",
     "pinia": "^2.0.0-rc.10",
     "pinia-plugin-persist": "^1.0.0",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue3-popper": "^1.4.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",
