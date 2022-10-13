@@ -5,23 +5,9 @@ import HelloWorld from "./components/HelloWorld.vue";
 import { useStore } from "./store/index";
 const store = useStore();
 console.log(store);
-
-setTimeout(() => {
-  store.countPlusOne();
-}, 2000);
-setTimeout(() => {
-  store.countPlus(20);
-}, 3000);
 </script>
 
-<template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
-  <div>{{ store.count }}</div>
-  <div>{{ store.countPow2Getter }}</div>
-  <div>{{ store.countPow2 }}</div>
-  <div>{{ store.otherStoreCount }}</div>
-</template>
+<template>5656</template>
 
 <style>
 #app {
